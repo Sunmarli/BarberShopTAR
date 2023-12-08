@@ -15,7 +15,6 @@ if(isset($_GET['date'])){
             while($row = $result->fetch_assoc()){
                 $bookings[] = $row['timeslot'];
             }
-
             $stmt->close();
         }
     }
@@ -27,30 +26,39 @@ if (isset($_POST['submit'])) {
     $timeslot= $_POST['timeslot'];
     $date = $_GET['date'];  // Retrieve the date from the URL
 
-    // Validate and sanitize user inputs as needed
+    $stmt = $mysqli->prepare("select * from bookings where regdate = ? and timeslot = ? ");
+    $stmt->bind_param('ss', $date,$timeslot);
+    if($stmt->execute()){
+        $result = $stmt->get_result();
+        if($result->num_rows>0){
+            $msg = "<div class='alert alert-danger'>Already booked: " . $stmt->error . "</div>";
+        }else{
 
+            $stmt = $mysqli->prepare("INSERT INTO bookings (name, timeslot,email, regdate) VALUES (?, ?, ?, ?)");
+
+            // Check for statement preparation errors
+            if (!$stmt) {
+                die('Prepare Error: ' . $mysqli->error);
+            }
+
+            // Bind parameters
+            $stmt->bind_param('ssss', $name, $timeslot,$email, $date);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                $msg = "<div class='alert alert-success'>Booking Successful</div>";
+            } else {
+                $msg = "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+            }
+            $bookings[]=$timeslot;
+            // Close the statement and the database connection
+            $stmt->close();
+            $mysqli->close();
+        }
+    }
 
     // Use a prepared statement with placeholders
-    $stmt = $mysqli->prepare("INSERT INTO bookings (name, timeslot,email, regdate) VALUES (?, ?, ?, ?)");
 
-    // Check for statement preparation errors
-    if (!$stmt) {
-        die('Prepare Error: ' . $mysqli->error);
-    }
-
-    // Bind parameters
-    $stmt->bind_param('ssss', $name, $timeslot,$email, $date);
-
-    // Execute the statement
-    if ($stmt->execute()) {
-        $msg = "<div class='alert alert-success'>Booking Successful</div>";
-    } else {
-        $msg = "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
-    }
-    $bookings[]=$timeslot;
-    // Close the statement and the database connection
-    $stmt->close();
-    $mysqli->close();
 }
 $duration=20;
 $cleanup=10;

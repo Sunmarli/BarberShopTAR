@@ -51,7 +51,7 @@
 <div id="header" class="container-fluid">
     <div class="container">
         <div class="text-center">
-            <img id="logo" src="img/Barbershop.webp" alt="Logo" height="140" width="200" >
+            <img id="logo" src="img/Barbershop.webp" alt="Logo" height="300" width="500" >
         </div>
         <div class="col-sm-4"></div>
         <div class="col-sm-4 text-right">
@@ -68,119 +68,14 @@
 <div class='container'>
     <div class='panel panel-primary dialog-panel'>
         <div class='panel-heading'>
-            <h5>Reservation Form </h5>
+            <h5> Barbershop reservation : Our specialist are the best in the city </h5>
         </div>
         <div class='panel-body'>
-            <form class='form-horizontal' role='form'>
-                <div class='form-group'>
-                    <label class='control-label col-md-2 col-md-offset-2' for='id_accomodation'> Specialist</label>
-                    <div class='col-md-2'>
-                        <select class='form-control' id='id_accomodation'>
-                            <option> Karl</option>
-                            <option>Jurgan</option>
-                            <option>Marina</option>
-                        </select>
-                    </div>
-                </div>
-                <div class='form-group'>
-                    <label class='control-label col-md-2 col-md-offset-2'>Client Name</label>
-                        <div class='col-md-3 indent-small'>
-                            <div class='form-group internal'>
-                                <input class='form-control' id='id_first_name' placeholder='First Name' type='text'>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <label class='control-label col-md-2 col-md-offset-2' >Client Surname</label>
-                        <div class='col-md-3 indent-small'>
-                            <div class='form-group internal'>
-                                <input class='form-control' id='id_last_name' placeholder='Last Name' type='text'>
-                            </div>
-                        </div>
-                    </div>
-                
-                <div class='form-group'>
-                    <div class='col-md-8'>
-                        <div class='col-md-3 indent-small'>
-                            <div class='form-group internal'>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='form-group'>
-                    <label class='control-label col-md-2 col-md-offset-2' for='id_email'>Contact</label>
-                    <div class='col-md-6'>
-                        <div class='form-group'>
-                            <div class='col-md-11'>
-                                <input class='form-control' id='id_email' placeholder='E-mail' type='text'>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div class='form-group'>
-                    <label class='control-label col-md-2 col-md-offset-2' for='id_service'>Haircut</label>
-                    <div class='col-md-8'>
-                        <select class='multiselect' id='id_service' multiple='multiple'>
-                            <option value='hydro'>1</option>
-                            <option value='water'>2</option>
-                            <option value='sewer'>3</option>
-                        </select>
-                    </div>
-                </div>
-                      
-                <div class='form-group'>
-                    <div class='form-group'>
-                        <label class='control-label col-md-2 col-md-offset-2' for='id_checkin'>Checkin</label>
-                        <div class='col-md-8'>
-                            <div class='col-md-6'>
-                                <div class='form-group internal input-group date' id='datetimepicker'>
-                                    <input class='form-control' id='id_checkin' name='id_checkin'>
-                                    <span class='input-group-addon'>
-                                        <span class='glyphicon glyphicon-calendar'></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <script>
-                        $(document).ready(function () {
-                            // Initialize datepicker
-                            $('#id_checkin').datepicker({
-                                format: 'yyyy-mm-dd hh:ii',
-                                autoclose: true,
-                                minuteStep: 30, // Set the minute step to 30 minutes
-                                startDate: new Date() // Optional: Set the minimum date to the current date
-                            });
-                    
-                            // Add event listener for date change
-                            $('#id_checkin').on('changeDate', function (e) {
-                                // Get the selected date and time
-                                var selectedDate = e.date;
-                    
-                                // Calculate the end time by adding 30 minutes
-                                var endDate = new Date(selectedDate.getTime() + 30 * 60000);
-                    
-                                // Update the end time input or perform any other necessary actions
-                                // Assuming you have an input field with the id 'id_checkout' for the end time
-                                $('#id_checkout').val(endDate);
-                            });
-                        });
-                    </script>
-                        <label class='control-label col-md-2 col-md-offset-2' for='id_comments'>Comments</label>
-                    <div class='col-md-6'>
-                        <textarea class='form-control' id='id_comments' placeholder='Additional comments' rows='3'></textarea>
-                    </div>
-                </div>
                 <div class='form-group'>
                     <div class='col-md-offset-4 col-md-3'>
-                        <button class='btn-lg btn-primary' type='submit'>Request Reservation</button>
+                        <a href="index.php" target="_blank">   <button class='btn-lg btn-primary' type='submit'>Make your booking</button></a>
                     </div>
-                    <div class='col-md-3'>
-                        <button class='btn-lg btn-danger' style='float:right' type='submit'>Cancel</button>
-                    </div>
+
                 </div>
             </form>
         </div>
