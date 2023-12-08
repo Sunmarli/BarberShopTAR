@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+    <title>BarberShop</title>
+
+</head>
+<body>
+
+
+    
+    
+    <nav id="navbar" class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+
+    <div class="container">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="active">
+                    <a href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+               
+                <li>
+                    <a href="#appointment">Appointment</a>
+                </li>
+                <li>
+                    <a href="#aboutus">About Us</a>
+                </li>
+            </ul>
+            <!-- <form class="navbar-form navbar-right col-sm-4">
+                <input id="search-input" type="text" class="form-control" placeholder="Search">
+                <button id="search-button" type="submit" class="btn btn-danger">Submit</button>
+            </form> -->
+        </div>
+    </div>
+</nav>
+
+
+<div id="header" class="container-fluid">
+    <div class="container">
+        <div class="text-center">
+            <img id="logo" src="img/Barbershop.webp" alt="Logo" height="140" width="200" >
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 text-right">
+            <div id="register" class="item">
+
+            </div>
+            <div class="text-center">
+                Never Call-always book
+            </div>
+        </div>
+    </div>
+</div>
+<!--form to check in-->
+<div class='container'>
+    <div class='panel panel-primary dialog-panel'>
+        <div class='panel-heading'>
+            <h5>Reservation Form </h5>
+        </div>
+        <div class='panel-body'>
+            <form class='form-horizontal' role='form'>
+                <div class='form-group'>
+                    <label class='control-label col-md-2 col-md-offset-2' for='id_accomodation'> Specialist</label>
+                    <div class='col-md-2'>
+                        <select class='form-control' id='id_accomodation'>
+                            <option> Karl</option>
+                            <option>Jurgan</option>
+                            <option>Marina</option>
+                        </select>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <label class='control-label col-md-2 col-md-offset-2'>Client Name</label>
+                        <div class='col-md-3 indent-small'>
+                            <div class='form-group internal'>
+                                <input class='form-control' id='id_first_name' placeholder='First Name' type='text'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='control-label col-md-2 col-md-offset-2' >Client Surname</label>
+                        <div class='col-md-3 indent-small'>
+                            <div class='form-group internal'>
+                                <input class='form-control' id='id_last_name' placeholder='Last Name' type='text'>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class='form-group'>
+                    <div class='col-md-8'>
+                        <div class='col-md-3 indent-small'>
+                            <div class='form-group internal'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <label class='control-label col-md-2 col-md-offset-2' for='id_email'>Contact</label>
+                    <div class='col-md-6'>
+                        <div class='form-group'>
+                            <div class='col-md-11'>
+                                <input class='form-control' id='id_email' placeholder='E-mail' type='text'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class='form-group'>
+                    <label class='control-label col-md-2 col-md-offset-2' for='id_service'>Haircut</label>
+                    <div class='col-md-8'>
+                        <select class='multiselect' id='id_service' multiple='multiple'>
+                            <option value='hydro'>1</option>
+                            <option value='water'>2</option>
+                            <option value='sewer'>3</option>
+                        </select>
+                    </div>
+                </div>
+                      
+                <div class='form-group'>
+                    <div class='form-group'>
+                        <label class='control-label col-md-2 col-md-offset-2' for='id_checkin'>Checkin</label>
+                        <div class='col-md-8'>
+                            <div class='col-md-6'>
+                                <div class='form-group internal input-group date' id='datetimepicker'>
+                                    <input class='form-control' id='id_checkin' name='id_checkin'>
+                                    <span class='input-group-addon'>
+                                        <span class='glyphicon glyphicon-calendar'></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <script>
+                        $(document).ready(function () {
+                            // Initialize datepicker
+                            $('#id_checkin').datepicker({
+                                format: 'yyyy-mm-dd hh:ii',
+                                autoclose: true,
+                                minuteStep: 30, // Set the minute step to 30 minutes
+                                startDate: new Date() // Optional: Set the minimum date to the current date
+                            });
+                    
+                            // Add event listener for date change
+                            $('#id_checkin').on('changeDate', function (e) {
+                                // Get the selected date and time
+                                var selectedDate = e.date;
+                    
+                                // Calculate the end time by adding 30 minutes
+                                var endDate = new Date(selectedDate.getTime() + 30 * 60000);
+                    
+                                // Update the end time input or perform any other necessary actions
+                                // Assuming you have an input field with the id 'id_checkout' for the end time
+                                $('#id_checkout').val(endDate);
+                            });
+                        });
+                    </script>
+                        <label class='control-label col-md-2 col-md-offset-2' for='id_comments'>Comments</label>
+                    <div class='col-md-6'>
+                        <textarea class='form-control' id='id_comments' placeholder='Additional comments' rows='3'></textarea>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-offset-4 col-md-3'>
+                        <button class='btn-lg btn-primary' type='submit'>Request Reservation</button>
+                    </div>
+                    <div class='col-md-3'>
+                        <button class='btn-lg btn-danger' style='float:right' type='submit'>Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="footer" class="container" id="aboutus">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <p>Copyright 2018 <b></b> Designed by LazyTeam
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/code.js"></script>
+</html>
