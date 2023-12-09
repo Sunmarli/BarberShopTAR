@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $timeslot= $_POST['timeslot'];
+    $specialist=$_POST['specialist'];
     $date = $_GET['date'];  // Retrieve the date from the URL
 
     $stmt = $mysqli->prepare("select * from bookings where regdate = ? and timeslot = ? ");
@@ -34,7 +35,7 @@ if (isset($_POST['submit'])) {
             $msg = "<div class='alert alert-danger'>Already booked: " . $stmt->error . "</div>";
         }else{
 
-            $stmt = $mysqli->prepare("INSERT INTO bookings (name, timeslot,email, regdate) VALUES (?, ?, ?, ?)");
+            $stmt = $mysqli->prepare("INSERT INTO bookings (name, timeslot,email, regdate,specialist) VALUES (?, ?, ?, ?,?)");
 
             // Check for statement preparation errors
             if (!$stmt) {
@@ -42,7 +43,7 @@ if (isset($_POST['submit'])) {
             }
 
             // Bind parameters
-            $stmt->bind_param('ssss', $name, $timeslot,$email, $date);
+            $stmt->bind_param('sssss', $name, $timeslot,$email, $date,$specialist);
 
             // Execute the statement
             if ($stmt->execute()) {
@@ -51,13 +52,13 @@ if (isset($_POST['submit'])) {
                 $msg = "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
             }
             $bookings[]=$timeslot;
-            // Close the statement and the database connection
+
             $stmt->close();
             $mysqli->close();
         }
     }
 
-    // Use a prepared statement with placeholders
+
 
 }
 $duration=20;
@@ -158,6 +159,17 @@ function timeslots($duration,$cleanup,$start,$end){
                                     Email
                                 </label>
                                 <input required type="email" name="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">
+                                    Specialist
+                                </label>
+                                <SELECT multiple name="specialist" class="form-control input-sm">
+                                    <option value='Anastasia Mironova'>Anastasia Mironova</option>
+                                    <option value='Vladimir Jakovenko'>Vladimir Jakovenko</option>
+                                    <option value='Liza Luis'>Liza Luis</option>
+                                    <option value='Any'>Any</option>
+                                </select>
                             </div>
                             <div class="form-group pull-right">
                                 <button class="btn btn-primary" type="submit" name="submit">Submit</button>
